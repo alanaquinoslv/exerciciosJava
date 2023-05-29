@@ -20,7 +20,7 @@ public class Conexao {
 
         dataSource​.setUrl("jdbc:h2:file:./banco_teste");
 
-        dataSource​.setUsername("sa");
+        dataSource​.setUsername("");
 
         dataSource​.setPassword("");
 

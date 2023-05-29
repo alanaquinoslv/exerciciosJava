@@ -18,7 +18,7 @@ public class ConexaoMySQL {
         dataSource​.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource​.setUrl("jdbc:mysql://localhost:3306/stabillis");
         dataSource​.setUsername("root");
-        dataSource​.setPassword("rq@ln082@");
+        dataSource​.setPassword("---");
 
         this.connectionMySql = new JdbcTemplate(dataSource);
     }
