@@ -1,5 +1,7 @@
 package sptech.classe.abstrata.tema;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -8,16 +10,18 @@ import java.util.Scanner;
  */
 public class TesteAtletas {
 
+    private static List<Atleta> listaAtletas = new ArrayList<>();
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
         do {
-            System.out.println("\nMENU");
-            System.out.println("1. Treinar Atleta Corredor");
-            System.out.println("2. Treinar Atleta Saltador");
-            System.out.println("0. Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.println(String.format("Escolha uma opção: \n"
+                    + "1. Treinar atleta corredor \n"
+                    + "2. Treinar atleta saltador \n"
+                    + "0. Sair"));
+
             opcao = scanner.nextInt();
 
             switch (opcao) {
@@ -28,28 +32,29 @@ public class TesteAtletas {
                     treinarAtletaSaltador();
                     break;
                 case 0:
-                    System.out.println("Saindo do programa...");
-                    break;
+                    System.out.println("Até logo!");
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("Opção inválida.");
             }
+
         } while (opcao != 0);
     }
 
     private static void treinarAtletaCorredor() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite o nome do atleta corredor: ");
+        System.out.println("Digite o nome do atleta corredor: ");
         String nome = scanner.nextLine();
-        System.out.print("Digite a idade do atleta corredor: ");
-        int idade = scanner.nextInt();
-        System.out.print("Digite a velocidade máxima do atleta corredor: ");
-        int velocidadeMaxima = scanner.nextInt();
+        System.out.println("Digite a idade do atleta corredor:");
+        Integer idade = scanner.nextInt();
+        System.out.println("Digite a velocidade máxima do atleta corredor:");
+        Integer velocidadeMaxima = scanner.nextInt();
 
         AtletaCorredor atleta = new AtletaCorredor(nome, idade, velocidadeMaxima);
         atleta.treinar();
-        System.out.println("Nome: " + atleta.getNome());
-        System.out.println("Idade: " + atleta.getIdade());
-        System.out.println("Velocidade Máxima: " + atleta.getVelocidadeMaxima());
+        System.out.println(String.format("Nome: %s \n"
+                + "Idade: %d \n"
+                + "Velocidade máxima: %d",
+                nome, idade, velocidadeMaxima));
     }
 
     private static void treinarAtletaSaltador() {
@@ -57,14 +62,37 @@ public class TesteAtletas {
         System.out.print("Digite o nome do atleta saltador: ");
         String nome = scanner.nextLine();
         System.out.print("Digite a idade do atleta saltador: ");
-        int idade = scanner.nextInt();
+        Integer idade = scanner.nextInt();
         System.out.print("Digite a altura máxima do atleta saltador: ");
-        double alturaMaxima = scanner.nextDouble();
+        Double alturaMaxima = scanner.nextDouble();
 
         AtletaSaltador atleta = new AtletaSaltador(nome, idade, alturaMaxima);
         atleta.treinar();
-        System.out.println("Nome: " + atleta.getNome());
-        System.out.println("Idade: " + atleta.getIdade());
-        System.out.println("Altura Máxima: " + atleta.getAlturaMaxima());
+
+        System.out.println(String.format("Nome: \n"
+                + "Idade: \n"
+                + "Altura máxima: ",
+                nome, idade, alturaMaxima));
     }
+
+    private static void exibirListaAtletas() {
+        System.out.println("\nLISTA DE ATLETAS:");
+        if (listaAtletas.isEmpty()) {
+            System.out.println("Nenhum atleta cadastrado.");
+        } else {
+            for (Atleta atleta : listaAtletas) {
+                System.out.println("Nome: " + atleta.getNome());
+                System.out.println("Idade: " + atleta.getIdade());
+                if (atleta instanceof AtletaCorredor) {
+                    System.out.println("Tipo: Atleta Corredor");
+                    System.out.println("Velocidade Máxima: " + ((AtletaCorredor) atleta).getVelocidadeMaxima());
+                } else if (atleta instanceof AtletaSaltador) {
+                    System.out.println("Tipo: Atleta Saltador");
+                    System.out.println("Altura Máxima: " + ((AtletaSaltador) atleta).getAlturaMaxima());
+                }
+                System.out.println("-------------------------");
+            }
+        }
+    }
+
 }
